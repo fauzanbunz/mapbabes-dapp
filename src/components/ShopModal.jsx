@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { itemDB, rarityColors } from '../data/items';
+import CharacterPreview from './CharacterPreview'; // <-- Import baru
 
 export default function ShopModal({ gameState, updateGameState, showToast, onClose }) {
     const [subTab, setSubTab] = useState('clothes');
@@ -60,6 +61,11 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
             <div className="modal-body" style={{ flexDirection: 'column' }}>
                 <div style={{ textAlign: 'center', marginBottom: '10px', fontWeight: 800, color: 'var(--powder-pink)', fontSize: '18px' }}>
                     YOUR BALANCE: <span>{gameState.player.babes}</span> $babes
+                </div>
+                
+                {/* INI BAGIAN BARU: Menampilkan Pinata di Shop agar pemain bisa ngaca */}
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+                    <CharacterPreview currentClothes={gameState.equipped.clothes} />
                 </div>
                 
                 <div className="tab-container" style={{ maxWidth: '600px', margin: '0 auto 20px auto' }}>
