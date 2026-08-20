@@ -1,18 +1,15 @@
 import React from 'react';
 
 export default function CharacterPreview({ currentClothes }) {
-  // CID Pinata Anda sudah benar
   const ipfsBaseUrl = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
 
-  // Deklarasikan HANYA SATU KALI di sini
   let clothesFile = 'cloth_default'; 
   
-  // Gabungan pemetaan baju lama dan baru
+  // Baju Bawaan
   if (currentClothes === 'Red Bikini') clothesFile = 'shop_1'; 
-  if (currentClothes === 'Black Leather') clothesFile = 'shop_2'; // Jika ini baju lama, pastikan gambarnya ada
-  if (currentClothes === 'Neon Bikini') clothesFile = 'shop_2'; // Perhatikan: ini menimpa file shop_2. Pastikan file gambarnya benar
+  if (currentClothes === 'Neon Bikini') clothesFile = 'shop_2'; 
 
-  // 10 Baju Baru 
+  // 10 Baju Baru Pinata
   if (currentClothes === 'Baju Shop 1') clothesFile = 'shop_1';
   if (currentClothes === 'Baju Shop 2') clothesFile = 'shop_2';
   if (currentClothes === 'Baju Shop 3') clothesFile = 'shop_3';
@@ -24,7 +21,6 @@ export default function CharacterPreview({ currentClothes }) {
   if (currentClothes === 'Baju Shop 9') clothesFile = 'shop_9';
   if (currentClothes === 'Baju Shop 10') clothesFile = 'shop_10';
 
-  // --- KUMPULAN GAYA CSS MURNI ---
   const containerStyle = {
     position: 'relative',
     width: '100%',
@@ -53,8 +49,8 @@ export default function CharacterPreview({ currentClothes }) {
         <img src={`${ipfsBaseUrl}/bracelet_1.png`} style={layerStyle(30)} alt="Bracelet" />
         <img src={`${ipfsBaseUrl}/piercing_1.png`} style={layerStyle(40)} alt="Piercing" />
         
-        {/* LAYER BAJU BERUBAH OTOMATIS */}
-        <img src={`${ipfsBaseUrl}/${clothesFile}.png`} style={layerStyle(50)} alt="Clothes" />
+        {/* TAMBAHAN KUNCI (KEY) DISINI: Akan memaksa gambar berganti! */}
+        <img key={clothesFile} src={`${ipfsBaseUrl}/${clothesFile}.png`} style={layerStyle(50)} alt="Clothes" />
         
         <img src={`${ipfsBaseUrl}/hair_1.png`} style={layerStyle(60)} alt="Hair" />
     </div>
