@@ -61,25 +61,26 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
             const bgStyle = isEquipped ? 'rgba(241, 187, 88, 0.2)' : '';
 
             return (
-                <div key={itemName} className="item-square" onClick={() => handleEquip(itemName, cat)} style={{ borderColor, background: bgStyle, display: 'flex', flexDirection: 'column', padding: '10px' }}>
+                <div key={itemName} className="item-square" onClick={() => handleEquip(itemName, cat)} style={{ borderColor, background: bgStyle, display: 'flex', flexDirection: 'column', padding: '12px' }}>
                     {item && <div className="rarity-badge" style={{ background: rarityColors[item.rarity], top: '-5px', right: '-5px', left: 'auto', zIndex: 2 }}>{item.rarity}</div>}
                     
-                    {/* WADAH GAMBAR BACKGROUND ABU-ABU */}
-                    <div style={{ flex: 1, width: '100%', minHeight: '150px', backgroundColor: '#e2e8f0', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px', overflow: 'hidden' }}>
+                    {/* KOTAK ABU-ABU DI INVENTORY HUT */}
+                    <div style={{ flex: 1, width: '100%', minHeight: '160px', backgroundColor: '#e2e8f0', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px', overflow: 'hidden' }}>
                         {item && item.category === 'clothes' ? (
                             <img 
                                 src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
-                                style={{ width: '100%', height: '100%', maxHeight: '150px', objectFit: 'contain' }} 
+                                // Scale 2.2 untuk zoom di layar inventory
+                                style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(2.2)' }} 
                                 alt={itemName} 
                             />
                         ) : (
-                            <span style={{ color: '#94a3b8' }}>Item Preview</span>
+                            <span style={{ color: '#94a3b8', fontWeight: 'bold' }}>Item Preview</span>
                         )}
                     </div>
 
                     <div style={{ textAlign: 'center', marginTop: 'auto' }}>
                         <span style={{ fontWeight: 'bold', display: 'block' }}>{itemName}</span>
-                        <span style={{ fontSize: '10px', marginTop: '5px', color: isEquipped ? 'var(--pale-marigold)' : 'var(--lake-blue)', display: 'block' }}>
+                        <span style={{ fontSize: '11px', marginTop: '6px', color: isEquipped ? 'var(--pale-marigold)' : 'var(--lake-blue)', display: 'block', fontWeight: 'bold' }}>
                             {isEquipped ? '(EQUIPPED)' : '(Equip)'}
                         </span>
                     </div>
