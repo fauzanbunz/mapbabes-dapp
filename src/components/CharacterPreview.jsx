@@ -1,27 +1,56 @@
 import React from 'react';
 
 export default function CharacterPreview({ currentClothes }) {
-  // Ganti dengan CID Pinata asli Anda nanti
+  // GANTI INI DENGAN CID FOLDER PINATA ANDA NANTI
   const ipfsBaseUrl = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
 
-  // Konversi nama baju dari gameState menjadi nama fail gambar
-  let clothesFile = 'cloth_default';
-  if (currentClothes === 'Red Bikini') clothesFile = 'shop_1';
-  if (currentClothes === 'Black Leather') clothesFile = 'shop_2'; 
-  // Tambahkan mapping baju lain sesuai nama di items.js Anda
+  // Memetakan nama item di game dengan nama file di Pinata
+  let clothesFile = 'cloth_default'; // Baju bawaan
+  
+  if (currentClothes === 'Red Bikini') {
+      clothesFile = 'shop_1'; 
+  } else if (currentClothes === 'Black Leather') {
+      clothesFile = 'shop_2'; 
+  }
+  // Tambahkan Else-If lain jika ada baju tambahan
+
+  // --- KUMPULAN GAYA CSS MURNI AGAR TIDAK MERUSAK LAYOUT ---
+  
+  const containerStyle = {
+    position: 'relative',
+    width: '100%',
+    maxWidth: '280px', // Membatasi ukuran maksimal agar tidak membesar
+    aspectRatio: '1 / 1', // Memastikan bentuknya selalu kotak presisi
+    margin: '0 auto',
+    backgroundColor: '#111',
+    borderRadius: '12px',
+    overflow: 'hidden',
+    border: '2px solid var(--powder-pink)', // Menggunakan warna tema Anda
+    boxShadow: '0 10px 20px rgba(0,0,0,0.5)'
+  };
+
+  const layerStyle = (zIndex) => ({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    zIndex: zIndex
+  });
 
   return (
-    <div className="relative w-64 h-64 mx-auto bg-black rounded-lg overflow-hidden border border-gray-700 shadow-lg">
-      <img src={`${ipfsBaseUrl}/bg_1.png`} className="absolute inset-0 z-0 w-full h-full object-cover" alt="BG" />
-      <img src={`${ipfsBaseUrl}/body_1.png`} className="absolute inset-0 z-10 w-full h-full object-cover" alt="Body" />
-      <img src={`${ipfsBaseUrl}/eye_1.png`} className="absolute inset-0 z-20 w-full h-full object-cover" alt="Eye" />
-      <img src={`${ipfsBaseUrl}/bracelet_1.png`} className="absolute inset-0 z-30 w-full h-full object-cover" alt="Bracelet" />
-      <img src={`${ipfsBaseUrl}/piercing_1.png`} className="absolute inset-0 z-40 w-full h-full object-cover" alt="Piercing" />
-      
-      {/* BAJU BISA BERUBAH SESUAI PROPS */}
-      <img src={`${ipfsBaseUrl}/${clothesFile}.png`} className="absolute inset-0 z-50 w-full h-full object-cover" alt="Clothes" />
-      
-      <img src={`${ipfsBaseUrl}/hair_1.png`} className="absolute inset-0 z-60 w-full h-full object-cover" alt="Hair" />
+    <div style={containerStyle}>
+        <img src={`${ipfsBaseUrl}/bg_1.png`} style={layerStyle(0)} alt="Background" />
+        <img src={`${ipfsBaseUrl}/body_1.png`} style={layerStyle(10)} alt="Body" />
+        <img src={`${ipfsBaseUrl}/eye_1.png`} style={layerStyle(20)} alt="Eye" />
+        <img src={`${ipfsBaseUrl}/bracelet_1.png`} style={layerStyle(30)} alt="Bracelet" />
+        <img src={`${ipfsBaseUrl}/piercing_1.png`} style={layerStyle(40)} alt="Piercing" />
+        
+        {/* LAYER BAJU BERUBAH OTOMATIS */}
+        <img src={`${ipfsBaseUrl}/${clothesFile}.png`} style={layerStyle(50)} alt="Clothes" />
+        
+        <img src={`${ipfsBaseUrl}/hair_1.png`} style={layerStyle(60)} alt="Hair" />
     </div>
   );
 }
