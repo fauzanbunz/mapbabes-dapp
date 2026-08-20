@@ -10,7 +10,7 @@ export const itemDB = {
     'Dragon Tattoo': { price: 500, rarity: 'Epic', score: 50, category: 'accessories', lvl: 1 },
     'Aviators': { price: 200, rarity: 'Rare', score: 25, category: 'glasses', lvl: 1 },
     '3D Glasses': { price: 500, rarity: 'Epic', score: 50, category: 'glasses', lvl: 1 },
-    'Green Eyes': { price: 1500, rarity: 'Legendary', score: 100, category: 'glasses', lvl: 1 }
+    'Green Eyes': { price: 1500, rarity: 'Legendary', score: 100, category: 'glasses', lvl: 1 }, // <-- TAMBAHKAN KOMA DI SINI
     // Tambahkan 10 baju baru dari Pinata:
     "Baju Shop 1": { category: "clothes", rarity: "Common", price: 50 },
     "Baju Shop 2": { category: "clothes", rarity: "Common", price: 50 },
