@@ -48,25 +48,26 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
             if (item.category === category && item.price > 0) {
                 const color = rarityColors[item.rarity];
                 return (
-                    <div key={itemName} className="item-square" style={{ borderColor: color, display: 'flex', flexDirection: 'column', padding: '10px' }} onClick={() => handleBuyItem(itemName)}>
+                    <div key={itemName} className="item-square" style={{ borderColor: color, display: 'flex', flexDirection: 'column', padding: '15px' }} onClick={() => handleBuyItem(itemName)}>
                         <div className="rarity-badge" style={{ background: color, zIndex: 2 }}>{item.rarity}</div>
                         
-                        {/* WADAH GAMBAR BACKGROUND ABU-ABU */}
-                        <div style={{ flex: 1, width: '100%', minHeight: '180px', backgroundColor: '#e2e8f0', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px', overflow: 'hidden' }}>
+                        {/* KOTAK ABU-ABU FULL FRAME & GAMBAR DI-ZOOM (SCALE) */}
+                        <div style={{ flex: 1, width: '100%', minHeight: '200px', backgroundColor: '#e2e8f0', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '15px', overflow: 'hidden' }}>
                             {item.category === 'clothes' ? (
                                 <img 
                                     src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
-                                    style={{ width: '100%', height: '100%', maxHeight: '180px', objectFit: 'contain' }} 
+                                    // Scale 2.5 akan nge-zoom gambar untuk membuang area transparan yang kosong
+                                    style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(2.5)' }} 
                                     alt={itemName} 
                                 />
                             ) : (
-                                <span style={{ color: '#94a3b8' }}>Item Preview</span>
+                                <span style={{ color: '#94a3b8', fontWeight: 'bold' }}>Item Preview</span>
                             )}
                         </div>
                         
                         <div style={{ textAlign: 'center', marginTop: 'auto' }}>
-                            <span style={{ fontWeight: 'bold', display: 'block' }}>{itemName}</span>
-                            <span className="item-price" style={{ color: color, marginTop: '5px', display: 'block' }}>{item.price} $babes</span>
+                            <span style={{ fontWeight: 'bold', display: 'block', fontSize: '16px' }}>{itemName}</span>
+                            <span className="item-price" style={{ color: color, marginTop: '8px', display: 'block', fontSize: '14px' }}>{item.price} $babes</span>
                         </div>
                     </div>
                 );
