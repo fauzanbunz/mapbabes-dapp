@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { itemDB, rarityColors } from '../data/items';
+import CharacterPreview from './CharacterPreview'; // <-- Import baru
 
 export default function HutModal({ gameState, updateGameState, showToast, onClose }) {
     const [mainTab, setMainTab] = useState('wardrobe');
@@ -71,15 +72,13 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
                 <div className="col-left" style={{ flex: 0.8 }}>
                     <div className="modal-section" style={{ flex: 1 }}>
                         <h4 className="section-title">PLAYER CARD</h4>
-                        <div className="nft-large">
-                            YOUR BABE<br /><br />
-                            <span style={{ fontSize: '12px', color: 'var(--powder-pink)', lineHeight: 1.8 }}>
-                                [ {gameState.equipped.clothes || 'None'} ]<br />
-                                [ {gameState.equipped.accessories || 'None'} ]<br />
-                                [ {gameState.equipped.glasses || 'None'} ]
-                            </span>
+                        
+                        {/* INI BAGIAN YANG BERUBAH: Memanggil Pinata ke dalam kotak nft-large Anda */}
+                        <div className="nft-large" style={{ padding: 0, overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <CharacterPreview currentClothes={gameState.equipped.clothes} />
                         </div>
-                        <div style={{ display: 'flex', gap: '5px', marginBottom: '15px' }}>
+                        
+                        <div style={{ display: 'flex', gap: '5px', marginBottom: '15px', marginTop: '15px' }}>
                             <input type="text" className="input-text" style={{ marginBottom: 0 }} placeholder="Change name..." value={nameInput} onChange={(e) => setNameInput(e.target.value)} />
                             <button className="btn btn-pink" onClick={handleSaveName} style={{ width: 'auto', marginBottom: 0, padding: '10px' }}>SAVE</button>
                         </div>
@@ -94,7 +93,7 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
                     </div>
                 </div>
 
-                {/* PANEL KANAN */}
+                {/* PANEL KANAN (TETAP SAMA) */}
                 <div className="col-right" style={{ flex: 1.2 }}>
                     <div className="modal-section" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                         <div className="tab-container">
