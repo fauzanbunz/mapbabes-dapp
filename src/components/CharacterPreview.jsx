@@ -1,27 +1,18 @@
 import React from 'react';
 
 export default function CharacterPreview({ currentClothes }) {
-  // GANTI INI DENGAN CID FOLDER PINATA ANDA NANTI
+  // CID Pinata Anda sudah benar
   const ipfsBaseUrl = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
 
-  // Memetakan nama item di game dengan nama file di Pinata
-  let clothesFile = 'cloth_default'; // Baju bawaan
-  
-  if (currentClothes === 'Red Bikini') {
-      clothesFile = 'shop_1'; 
-  } else if (currentClothes === 'Black Leather') {
-      clothesFile = 'shop_2'; 
-  }
-  // Tambahkan Else-If lain jika ada baju tambahan
-
-  // Memetakan nama item dari items.js ke nama file di Pinata
+  // Deklarasikan HANYA SATU KALI di sini
   let clothesFile = 'cloth_default'; 
   
-  // Baju bawaan Anda
+  // Gabungan pemetaan baju lama dan baru
   if (currentClothes === 'Red Bikini') clothesFile = 'shop_1'; 
-  if (currentClothes === 'Neon Bikini') clothesFile = 'shop_2';
+  if (currentClothes === 'Black Leather') clothesFile = 'shop_2'; // Jika ini baju lama, pastikan gambarnya ada
+  if (currentClothes === 'Neon Bikini') clothesFile = 'shop_2'; // Perhatikan: ini menimpa file shop_2. Pastikan file gambarnya benar
 
-  // 10 Baju Baru (sesuaikan dengan nama di items.js tadi)
+  // 10 Baju Baru 
   if (currentClothes === 'Baju Shop 1') clothesFile = 'shop_1';
   if (currentClothes === 'Baju Shop 2') clothesFile = 'shop_2';
   if (currentClothes === 'Baju Shop 3') clothesFile = 'shop_3';
@@ -33,15 +24,13 @@ export default function CharacterPreview({ currentClothes }) {
   if (currentClothes === 'Baju Shop 9') clothesFile = 'shop_9';
   if (currentClothes === 'Baju Shop 10') clothesFile = 'shop_10';
 
-  // --- KUMPULAN GAYA CSS MURNI AGAR TIDAK MERUSAK LAYOUT ---
-  
+  // --- KUMPULAN GAYA CSS MURNI ---
   const containerStyle = {
     position: 'relative',
     width: '100%',
-    height: '100%', // Memaksa gambar memenuhi kotak induknya
+    height: '100%', 
     aspectRatio: '1 / 1',
     backgroundColor: '#111', 
-    // Hapus border, margin, dan maxWidth agar menyatu dengan desain UI Anda
     overflow: 'hidden',
     boxShadow: '0 10px 20px rgba(0,0,0,0.5)'
   };
