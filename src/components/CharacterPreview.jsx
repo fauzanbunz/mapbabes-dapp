@@ -14,6 +14,25 @@ export default function CharacterPreview({ currentClothes }) {
   }
   // Tambahkan Else-If lain jika ada baju tambahan
 
+  // Memetakan nama item dari items.js ke nama file di Pinata
+  let clothesFile = 'cloth_default'; 
+  
+  // Baju bawaan Anda
+  if (currentClothes === 'Red Bikini') clothesFile = 'shop_1'; 
+  if (currentClothes === 'Neon Bikini') clothesFile = 'shop_2';
+
+  // 10 Baju Baru (sesuaikan dengan nama di items.js tadi)
+  if (currentClothes === 'Baju Shop 1') clothesFile = 'shop_1';
+  if (currentClothes === 'Baju Shop 2') clothesFile = 'shop_2';
+  if (currentClothes === 'Baju Shop 3') clothesFile = 'shop_3';
+  if (currentClothes === 'Baju Shop 4') clothesFile = 'shop_4';
+  if (currentClothes === 'Baju Shop 5') clothesFile = 'shop_5';
+  if (currentClothes === 'Baju Shop 6') clothesFile = 'shop_6';
+  if (currentClothes === 'Baju Shop 7') clothesFile = 'shop_7';
+  if (currentClothes === 'Baju Shop 8') clothesFile = 'shop_8';
+  if (currentClothes === 'Baju Shop 9') clothesFile = 'shop_9';
+  if (currentClothes === 'Baju Shop 10') clothesFile = 'shop_10';
+
   // --- KUMPULAN GAYA CSS MURNI AGAR TIDAK MERUSAK LAYOUT ---
   
   const containerStyle = {
