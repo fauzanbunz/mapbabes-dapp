@@ -1,11 +1,29 @@
 import { useState } from 'react';
 import { itemDB, rarityColors } from '../data/items';
-import CharacterPreview from './CharacterPreview'; // <-- Import baru
+import CharacterPreview from './CharacterPreview';
 
 export default function HutModal({ gameState, updateGameState, showToast, onClose }) {
     const [mainTab, setMainTab] = useState('wardrobe');
     const [subTab, setSubTab] = useState('clothes');
     const [nameInput, setNameInput] = useState('');
+
+    const IPFS_BASE = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
+
+    const getFileName = (itemName) => {
+        if (itemName === 'Red Bikini') return 'shop_1';
+        if (itemName === 'Neon Bikini') return 'shop_2';
+        if (itemName === 'Baju Shop 1') return 'shop_1';
+        if (itemName === 'Baju Shop 2') return 'shop_2';
+        if (itemName === 'Baju Shop 3') return 'shop_3';
+        if (itemName === 'Baju Shop 4') return 'shop_4';
+        if (itemName === 'Baju Shop 5') return 'shop_5';
+        if (itemName === 'Baju Shop 6') return 'shop_6';
+        if (itemName === 'Baju Shop 7') return 'shop_7';
+        if (itemName === 'Baju Shop 8') return 'shop_8';
+        if (itemName === 'Baju Shop 9') return 'shop_9';
+        if (itemName === 'Baju Shop 10') return 'shop_10';
+        return 'cloth_default';
+    };
 
     const handleSaveName = () => {
         if (nameInput.trim() !== "") {
@@ -43,12 +61,28 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
             const bgStyle = isEquipped ? 'rgba(241, 187, 88, 0.2)' : '';
 
             return (
-                <div key={itemName} className="item-square" onClick={() => handleEquip(itemName, cat)} style={{ borderColor, background: bgStyle }}>
-                    {item && <div className="rarity-badge" style={{ background: rarityColors[item.rarity], top: '-5px', right: '-5px', left: 'auto' }}>{item.rarity}</div>}
-                    <span>{itemName}</span>
-                    <span style={{ fontSize: '10px', marginTop: '5px', color: isEquipped ? 'var(--pale-marigold)' : 'var(--lake-blue)' }}>
-                        {isEquipped ? '(EQUIPPED)' : '(Equip)'}
-                    </span>
+                <div key={itemName} className="item-square" onClick={() => handleEquip(itemName, cat)} style={{ borderColor, background: bgStyle, display: 'flex', flexDirection: 'column', padding: '10px' }}>
+                    {item && <div className="rarity-badge" style={{ background: rarityColors[item.rarity], top: '-5px', right: '-5px', left: 'auto', zIndex: 2 }}>{item.rarity}</div>}
+                    
+                    {/* WADAH GAMBAR BACKGROUND ABU-ABU */}
+                    <div style={{ flex: 1, width: '100%', minHeight: '150px', backgroundColor: '#e2e8f0', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px', overflow: 'hidden' }}>
+                        {item && item.category === 'clothes' ? (
+                            <img 
+                                src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
+                                style={{ width: '100%', height: '100%', maxHeight: '150px', objectFit: 'contain' }} 
+                                alt={itemName} 
+                            />
+                        ) : (
+                            <span style={{ color: '#94a3b8' }}>Item Preview</span>
+                        )}
+                    </div>
+
+                    <div style={{ textAlign: 'center', marginTop: 'auto' }}>
+                        <span style={{ fontWeight: 'bold', display: 'block' }}>{itemName}</span>
+                        <span style={{ fontSize: '10px', marginTop: '5px', color: isEquipped ? 'var(--pale-marigold)' : 'var(--lake-blue)', display: 'block' }}>
+                            {isEquipped ? '(EQUIPPED)' : '(Equip)'}
+                        </span>
+                    </div>
                 </div>
             );
         });
@@ -72,12 +106,9 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
                 <div className="col-left" style={{ flex: 0.8 }}>
                     <div className="modal-section" style={{ flex: 1 }}>
                         <h4 className="section-title">PLAYER CARD</h4>
-                        
-                        {/* INI BAGIAN YANG BERUBAH: Memanggil Pinata ke dalam kotak nft-large Anda */}
                         <div className="nft-large" style={{ padding: 0, overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <CharacterPreview currentClothes={gameState.equipped.clothes} />
                         </div>
-                        
                         <div style={{ display: 'flex', gap: '5px', marginBottom: '15px', marginTop: '15px' }}>
                             <input type="text" className="input-text" style={{ marginBottom: 0 }} placeholder="Change name..." value={nameInput} onChange={(e) => setNameInput(e.target.value)} />
                             <button className="btn btn-pink" onClick={handleSaveName} style={{ width: 'auto', marginBottom: 0, padding: '10px' }}>SAVE</button>
@@ -93,7 +124,7 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
                     </div>
                 </div>
 
-                {/* PANEL KANAN (TETAP SAMA) */}
+                {/* PANEL KANAN */}
                 <div className="col-right" style={{ flex: 1.2 }}>
                     <div className="modal-section" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                         <div className="tab-container">
