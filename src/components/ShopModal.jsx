@@ -7,11 +7,9 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
     // Link utama Pinata Anda
     const IPFS_BASE = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
 
-    // Fungsi untuk mengubah nama di game menjadi nama file PNG
     const getFileName = (itemName) => {
         if (itemName === 'Red Bikini') return 'shop_1';
         if (itemName === 'Neon Bikini') return 'shop_2';
-        // 10 Baju Baru
         if (itemName === 'Baju Shop 1') return 'shop_1';
         if (itemName === 'Baju Shop 2') return 'shop_2';
         if (itemName === 'Baju Shop 3') return 'shop_3';
@@ -50,21 +48,26 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
             if (item.category === category && item.price > 0) {
                 const color = rarityColors[item.rarity];
                 return (
-                    // Kotak item dibuat flex agar gambar ada di tengah
-                    <div key={itemName} className="item-square" style={{ borderColor: color, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={() => handleBuyItem(itemName)}>
-                        <div className="rarity-badge" style={{ background: color }}>{item.rarity}</div>
+                    <div key={itemName} className="item-square" style={{ borderColor: color, display: 'flex', flexDirection: 'column', padding: '10px' }} onClick={() => handleBuyItem(itemName)}>
+                        <div className="rarity-badge" style={{ background: color, zIndex: 2 }}>{item.rarity}</div>
                         
-                        {/* INI KODE YANG MEMUNCULKAN GAMBAR DI SHOP */}
-                        {item.category === 'clothes' && (
-                            <img 
-                                src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
-                                style={{ width: '80px', height: '80px', objectFit: 'contain', marginBottom: '10px' }} 
-                                alt={itemName} 
-                            />
-                        )}
+                        {/* WADAH GAMBAR BACKGROUND ABU-ABU */}
+                        <div style={{ flex: 1, width: '100%', minHeight: '180px', backgroundColor: '#e2e8f0', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px', overflow: 'hidden' }}>
+                            {item.category === 'clothes' ? (
+                                <img 
+                                    src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
+                                    style={{ width: '100%', height: '100%', maxHeight: '180px', objectFit: 'contain' }} 
+                                    alt={itemName} 
+                                />
+                            ) : (
+                                <span style={{ color: '#94a3b8' }}>Item Preview</span>
+                            )}
+                        </div>
                         
-                        <span style={{ fontWeight: 'bold' }}>{itemName}</span>
-                        <span className="item-price" style={{ color: color, marginTop: '5px' }}>{item.price} $babes</span>
+                        <div style={{ textAlign: 'center', marginTop: 'auto' }}>
+                            <span style={{ fontWeight: 'bold', display: 'block' }}>{itemName}</span>
+                            <span className="item-price" style={{ color: color, marginTop: '5px', display: 'block' }}>{item.price} $babes</span>
+                        </div>
                     </div>
                 );
             }
