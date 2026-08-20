@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { itemDB, rarityColors } from '../data/items';
-import CharacterPreview from './CharacterPreview'; // <-- Import baru
 
 export default function ShopModal({ gameState, updateGameState, showToast, onClose }) {
     const [subTab, setSubTab] = useState('clothes');
@@ -8,25 +7,20 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
     const handleBuyItem = (itemName) => {
         const item = itemDB[itemName];
         
-        // 1. Cek apakah sudah punya
         if (gameState.inventory[item.category].includes(itemName)) {
             showToast(`You already own ${itemName}!`);
             return;
         }
         
-        // 2. Cek apakah uang cukup
         if (gameState.player.babes >= item.price) {
-            // Potong saldo
             updateGameState('player', { babes: gameState.player.babes - item.price });
             
-            // Tambahkan item ke inventory (menggabungkan isi tas lama dengan item baru)
             const updatedCategory = [...gameState.inventory[item.category], itemName];
             updateGameState('inventory', { [item.category]: updatedCategory });
             
-            // Update statistik & XP (Dapat 25 XP tiap belanja)
             updateGameState('stats', { itemsOwned: gameState.stats.itemsOwned + 1 });
             updateGameState('player', { xp: gameState.player.xp + 25 });
-            updateGameState('quests', { itemBought: true }); // Selesaikan quest harian
+            updateGameState('quests', { itemBought: true }); 
             
             showToast(`Purchased ${item.rarity} ${itemName}! +25 XP`);
         } else {
@@ -59,13 +53,8 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
             </div>
             
             <div className="modal-body" style={{ flexDirection: 'column' }}>
-                <div style={{ textAlign: 'center', marginBottom: '10px', fontWeight: 800, color: 'var(--powder-pink)', fontSize: '18px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '20px', fontWeight: 800, color: 'var(--powder-pink)', fontSize: '18px' }}>
                     YOUR BALANCE: <span>{gameState.player.babes}</span> $babes
-                </div>
-                
-                {/* INI BAGIAN BARU: Menampilkan Pinata di Shop agar pemain bisa ngaca */}
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-                    <CharacterPreview currentClothes={gameState.equipped.clothes} />
                 </div>
                 
                 <div className="tab-container" style={{ maxWidth: '600px', margin: '0 auto 20px auto' }}>
