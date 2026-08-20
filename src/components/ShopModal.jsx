@@ -3,25 +3,41 @@ import { itemDB, rarityColors } from '../data/items';
 
 export default function ShopModal({ gameState, updateGameState, showToast, onClose }) {
     const [subTab, setSubTab] = useState('clothes');
+    
+    // Link utama Pinata Anda
+    const IPFS_BASE = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
+
+    // Fungsi untuk mengubah nama di game menjadi nama file PNG
+    const getFileName = (itemName) => {
+        if (itemName === 'Red Bikini') return 'shop_1';
+        if (itemName === 'Neon Bikini') return 'shop_2';
+        // 10 Baju Baru
+        if (itemName === 'Baju Shop 1') return 'shop_1';
+        if (itemName === 'Baju Shop 2') return 'shop_2';
+        if (itemName === 'Baju Shop 3') return 'shop_3';
+        if (itemName === 'Baju Shop 4') return 'shop_4';
+        if (itemName === 'Baju Shop 5') return 'shop_5';
+        if (itemName === 'Baju Shop 6') return 'shop_6';
+        if (itemName === 'Baju Shop 7') return 'shop_7';
+        if (itemName === 'Baju Shop 8') return 'shop_8';
+        if (itemName === 'Baju Shop 9') return 'shop_9';
+        if (itemName === 'Baju Shop 10') return 'shop_10';
+        return 'cloth_default';
+    };
 
     const handleBuyItem = (itemName) => {
         const item = itemDB[itemName];
-        
         if (gameState.inventory[item.category].includes(itemName)) {
             showToast(`You already own ${itemName}!`);
             return;
         }
-        
         if (gameState.player.babes >= item.price) {
             updateGameState('player', { babes: gameState.player.babes - item.price });
-            
             const updatedCategory = [...gameState.inventory[item.category], itemName];
             updateGameState('inventory', { [item.category]: updatedCategory });
-            
             updateGameState('stats', { itemsOwned: gameState.stats.itemsOwned + 1 });
             updateGameState('player', { xp: gameState.player.xp + 25 });
             updateGameState('quests', { itemBought: true }); 
-            
             showToast(`Purchased ${item.rarity} ${itemName}! +25 XP`);
         } else {
             showToast("Not enough $babes!");
@@ -34,10 +50,21 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
             if (item.category === category && item.price > 0) {
                 const color = rarityColors[item.rarity];
                 return (
-                    <div key={itemName} className="item-square" style={{ borderColor: color }} onClick={() => handleBuyItem(itemName)}>
+                    // Kotak item dibuat flex agar gambar ada di tengah
+                    <div key={itemName} className="item-square" style={{ borderColor: color, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={() => handleBuyItem(itemName)}>
                         <div className="rarity-badge" style={{ background: color }}>{item.rarity}</div>
-                        <span>{itemName}</span>
-                        <span className="item-price" style={{ color: color }}>{item.price} $babes</span>
+                        
+                        {/* INI KODE YANG MEMUNCULKAN GAMBAR DI SHOP */}
+                        {item.category === 'clothes' && (
+                            <img 
+                                src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
+                                style={{ width: '80px', height: '80px', objectFit: 'contain', marginBottom: '10px' }} 
+                                alt={itemName} 
+                            />
+                        )}
+                        
+                        <span style={{ fontWeight: 'bold' }}>{itemName}</span>
+                        <span className="item-price" style={{ color: color, marginTop: '5px' }}>{item.price} $babes</span>
                     </div>
                 );
             }
@@ -51,18 +78,15 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
                 <h3 className="modal-title">THE SHOP // MARKETPLACE</h3>
                 <div className="close-modal" onClick={onClose}>X</div>
             </div>
-            
             <div className="modal-body" style={{ flexDirection: 'column' }}>
                 <div style={{ textAlign: 'center', marginBottom: '20px', fontWeight: 800, color: 'var(--powder-pink)', fontSize: '18px' }}>
                     YOUR BALANCE: <span>{gameState.player.babes}</span> $babes
                 </div>
-                
                 <div className="tab-container" style={{ maxWidth: '600px', margin: '0 auto 20px auto' }}>
                     <button className={`tab-btn ${subTab === 'clothes' ? 'active' : ''}`} onClick={() => setSubTab('clothes')}>BIKINIS</button>
                     <button className={`tab-btn ${subTab === 'accessories' ? 'active' : ''}`} onClick={() => setSubTab('accessories')}>TATTOOS</button>
                     <button className={`tab-btn ${subTab === 'glasses' ? 'active' : ''}`} onClick={() => setSubTab('glasses')}>GLASSES</button>
                 </div>
-                
                 <div className="modal-section" style={{ flex: 1, overflowY: 'auto' }}>
                     <div className="item-grid">
                         {renderShopItems(subTab)}
