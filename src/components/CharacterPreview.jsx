@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function CharacterPreview() {
   // Ganti tulisan CID_IMAGES_ANDA dengan kode CID asli dari Pinata
-  const ipfsBaseUrl = "https://gateway.pinata.cloud/ipfs/CID_IMAGES_ANDA";
+  const ipfsBaseUrl = "https://gateway.pinata.cloud/ipfs/bafybeieksckbp7kmwgedsjvlgqrqvm57qqwgu3nykch6dkrhi724ysk3qu";
 
   // State untuk mendeteksi baju yang sedang dipakai
   const [equippedClothes, setEquippedClothes] = useState(null); 
