@@ -26,6 +26,7 @@ export const itemDB = {
 
 export const rarityColors = { 
     'Common': '#95a5a6', 
+    'Uncommon': '#2ecc71',
     'Rare': '#3498db', 
     'Epic': '#9b59b6', 
     'Legendary': '#f1c40f' 
