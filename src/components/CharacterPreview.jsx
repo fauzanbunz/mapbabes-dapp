@@ -19,13 +19,11 @@ export default function CharacterPreview({ currentClothes }) {
   const containerStyle = {
     position: 'relative',
     width: '100%',
-    maxWidth: '280px', // Membatasi ukuran maksimal agar tidak membesar
-    aspectRatio: '1 / 1', // Memastikan bentuknya selalu kotak presisi
-    margin: '0 auto',
-    backgroundColor: '#111',
-    borderRadius: '12px',
+    height: '100%', // Memaksa gambar memenuhi kotak induknya
+    aspectRatio: '1 / 1',
+    backgroundColor: '#111', 
+    // Hapus border, margin, dan maxWidth agar menyatu dengan desain UI Anda
     overflow: 'hidden',
-    border: '2px solid var(--powder-pink)', // Menggunakan warna tema Anda
     boxShadow: '0 10px 20px rgba(0,0,0,0.5)'
   };
 
