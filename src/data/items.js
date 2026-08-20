@@ -11,6 +11,17 @@ export const itemDB = {
     'Aviators': { price: 200, rarity: 'Rare', score: 25, category: 'glasses', lvl: 1 },
     '3D Glasses': { price: 500, rarity: 'Epic', score: 50, category: 'glasses', lvl: 1 },
     'Green Eyes': { price: 1500, rarity: 'Legendary', score: 100, category: 'glasses', lvl: 1 }
+    // Tambahkan 10 baju baru dari Pinata:
+    "Baju Shop 1": { category: "clothes", rarity: "Common", price: 50 },
+    "Baju Shop 2": { category: "clothes", rarity: "Common", price: 50 },
+    "Baju Shop 3": { category: "clothes", rarity: "Uncommon", price: 100 },
+    "Baju Shop 4": { category: "clothes", rarity: "Uncommon", price: 100 },
+    "Baju Shop 5": { category: "clothes", rarity: "Rare", price: 250 },
+    "Baju Shop 6": { category: "clothes", rarity: "Rare", price: 250 },
+    "Baju Shop 7": { category: "clothes", rarity: "Epic", price: 500 },
+    "Baju Shop 8": { category: "clothes", rarity: "Epic", price: 500 },
+    "Baju Shop 9": { category: "clothes", rarity: "Legendary", price: 1000 },
+    "Baju Shop 10": { category: "clothes", rarity: "Legendary", price: 1000 },
 };
 
 export const rarityColors = { 
