@@ -57,7 +57,7 @@ export default function ShopModal({ gameState, updateGameState, showToast, onClo
                                 <img 
                                     src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
                                     // Scale 2.5 akan nge-zoom gambar untuk membuang area transparan yang kosong
-                                    style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(2.5)' }} 
+                                    style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(1)' }} 
                                     alt={itemName} 
                                 />
                             ) : (
