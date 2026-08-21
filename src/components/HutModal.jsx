@@ -70,7 +70,7 @@ export default function HutModal({ gameState, updateGameState, showToast, onClos
                             <img 
                                 src={`${IPFS_BASE}/${getFileName(itemName)}.png`} 
                                 // Scale 2.2 untuk zoom di layar inventory
-                                style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(2.2)' }} 
+                                style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(1)' }} 
                                 alt={itemName} 
                             />
                         ) : (
