@@ -4,9 +4,9 @@ import HutModal from "../components/HutModal";
 import ShopModal from "../components/ShopModal";
 import CafeModal from "../components/CafeModal";
 import ClubModal from "../components/ClubModal";
-import GuardModal from "../components/GuardModal"; // <-- Import baru
-import QuestModal from "../components/QuestModal"; // <-- Import baru
-import MusicHUD from '../components/MusicHUD';
+import GuardModal from "../components/GuardModal"; 
+import QuestModal from "../components/QuestModal"; 
+import MusicHUD from '../components/MusicHUD'; // <-- IMPORT SUDAH BENAR DI SINI
 
 const defaultState = {
     player: { name: "Babes #001", level: 1, xp: 0, babes: 1000, eth: 0.5, reputation: "Island Tourist" },
@@ -17,6 +17,7 @@ const defaultState = {
 };
 
 export default function BabesMap() {
+    // ... [Semua logika state Anda tetap sama, tidak ada yang diubah] ...
     const [gameState, setGameState] = useState(defaultState);
     const [isLoaded, setIsLoaded] = useState(false);
     const [activeModal, setActiveModal] = useState(null); 
@@ -62,7 +63,6 @@ export default function BabesMap() {
     if (!isLoaded) return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading Babes Island...</div>;
 
     const xpPercent = (gameState.player.xp / 1000) * 100;
-    // Hitung berapa quest yang sudah selesai untuk ditampilkan di tombol Quests
     const completedQuestsCount = Object.values(gameState.quests).filter(Boolean).length;
 
     return (
@@ -89,7 +89,6 @@ export default function BabesMap() {
                     </div>
                 </div>
 
-                {/* TOMBOL QUESTS KINI AKTIF! */}
                 <div className="hud-quests" onClick={() => setActiveModal('quests')}>
                     📋 QUESTS ({completedQuestsCount}/5)
                 </div>
@@ -112,10 +111,11 @@ export default function BabesMap() {
             {activeModal === 'cafe' && <CafeModal gameState={gameState} updateGameState={updateGameState} showToast={showToast} onClose={() => setActiveModal(null)} />}
             {activeModal === 'club' && <ClubModal gameState={gameState} updateGameState={updateGameState} showToast={showToast} onClose={() => setActiveModal(null)} />}
             
-            {/* RENDER MODAL BARU */}
             {activeModal === 'guard' && <GuardModal showToast={showToast} onClose={() => setActiveModal(null)} />}
             {activeModal === 'quests' && <QuestModal gameState={gameState} onClose={() => setActiveModal(null)} />}
-                <MusicHUD />
+            
+            {/* ---> PASANG MUSIC HUD DI SINI <--- */}
+            <MusicHUD />
         </>
     );
 }
