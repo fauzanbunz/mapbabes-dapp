@@ -435,118 +435,115 @@ body {
         font-size: 10px !important; 
         border-width: 2px !important; 
     }
-    /* =========================================
-   MUSIC HUD & EQUALIZER EFFECTS
+/* =========================================
+   MUSIC HUD & EQUALIZER EFFECTS (JUMBO SIZE)
    ========================================= */
 .music-hud {
-    position: fixed;
-    bottom: 25px;
-    left: 20px; /* Muncul di pojok kiri bawah agar tidak menabrak profil */
-    background: rgba(26, 28, 41, 0.7); /* Transparan gelap */
-    backdrop-filter: blur(8px); /* Efek kaca */
-    border: 2px solid var(--lake-blue);
-    border-radius: 16px;
-    padding: 12px 20px;
+    position: absolute; /* Menempel di dalam map-container */
+    bottom: 30px;
+    left: 30px; 
+    background: rgba(26, 28, 41, 0.85); /* Kaca gelap agar lampu equalizer mencolok */
+    backdrop-filter: blur(10px); 
+    border: 4px solid var(--lake-blue);
+    border-radius: 20px;
+    padding: 15px 25px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    z-index: 50;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
+    gap: 20px; 
+    z-index: 40; /* Berada di atas peta */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
 }
 
 .music-info {
     display: flex;
     flex-direction: column;
-    width: 140px;
+    width: 180px; /* Teks area diperlebar */
 }
 
 .music-title {
     color: var(--white);
-    font-family: 'Nunito', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
+    font-family: 'Lilita One', cursive; /* Menggunakan font game yang tebal */
+    font-size: 18px; /* Teks judul lagu lebih besar */
+    letter-spacing: 1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .music-status {
     color: var(--pale-marigold);
     font-family: 'Lilita One', cursive;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 1px;
 }
 
-/* Tombol Kontrol Musik */
+/* Tombol Kontrol Musik Diperbesar */
 .music-controls {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
 
 .music-btn {
     background: linear-gradient(180deg, #1474E0 0%, #0F5BB0 100%);
-    border: 2px solid var(--lake-blue);
+    border: 3px solid var(--lake-blue);
     color: white;
-    width: 32px;
-    height: 32px;
+    width: 45px; /* Tombol lebih besar */
+    height: 45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 3px 0 var(--lake-blue);
+    font-size: 18px;
+    box-shadow: 0 4px 0 var(--lake-blue);
     transition: 0.1s;
 }
 
 .music-btn:active {
-    transform: translateY(3px);
+    transform: translateY(4px);
     box-shadow: 0 0 0 var(--lake-blue);
 }
 
-/* --- ANIMASI EQUALIZER ALA GAMBAR A --- */
+/* --- ANIMASI EQUALIZER JUMBO --- */
 .eq-container {
     display: flex;
     align-items: flex-end;
-    gap: 3px;
-    height: 24px;
+    gap: 4px; /* Jarak antar tiang */
+    height: 45px; /* Tinggi tiang equalizer dinaikkan drastis! */
 }
 
 .eq-bar {
-    width: 5px;
-    background: linear-gradient(to top, #6a1b9a, #d500f9, #ff4081); /* Ungu ke Pink */
-    border-radius: 1px;
+    width: 8px; /* Tiang lebih tebal */
+    background: linear-gradient(to top, #6a1b9a, #d500f9, #ff4081); /* Gradasi neon */
+    border-radius: 2px;
     transform-origin: bottom;
 }
 
-/* Animasi naik turun saat Play */
 .eq-bar.playing {
     animation: eq-bounce 0.5s infinite alternate ease-in-out;
 }
 
-/* Tiang equalizer memiliki ketinggian acak */
+/* Ketinggian tiang yang bervariasi */
 .eq-bar:nth-child(1) { height: 40%; animation-duration: 0.4s; }
 .eq-bar:nth-child(2) { height: 80%; animation-duration: 0.6s; }
 .eq-bar:nth-child(3) { height: 60%; animation-duration: 0.5s; }
-.eq-bar:nth-child(4) { height: 100%; animation-duration: 0.7s; }
+.eq-bar:nth-child(4) { height: 100%; animation-duration: 0.7s; } /* Paling tinggi di tengah */
 .eq-bar:nth-child(5) { height: 50%; animation-duration: 0.45s; }
 .eq-bar:nth-child(6) { height: 75%; animation-duration: 0.55s; }
 .eq-bar:nth-child(7) { height: 30%; animation-duration: 0.65s; }
 
 @keyframes eq-bounce {
-    0% { transform: scaleY(0.3); }
+    0% { transform: scaleY(0.2); }
     100% { transform: scaleY(1); }
 }
 
-/* Penyesuaian untuk Layar HP */
+/* Penyesuaian Khusus HP agar tidak menutupi seluruh layar bawah */
 @media (max-width: 768px) {
     .music-hud {
-        bottom: 15px;
-        left: 10px;
-        padding: 8px 12px;
-        transform: scale(0.85);
+        bottom: 20px;
+        left: 20px;
+        transform: scale(0.85); /* Di HP sedikit mengecil proporsional */
         transform-origin: bottom left;
     }
-}
 }
