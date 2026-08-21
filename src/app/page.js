@@ -6,6 +6,7 @@ import CafeModal from "../components/CafeModal";
 import ClubModal from "../components/ClubModal";
 import GuardModal from "../components/GuardModal"; // <-- Import baru
 import QuestModal from "../components/QuestModal"; // <-- Import baru
+import MusicHUD from '../components/MusicHUD';
 
 const defaultState = {
     player: { name: "Babes #001", level: 1, xp: 0, babes: 1000, eth: 0.5, reputation: "Island Tourist" },
@@ -114,6 +115,7 @@ export default function BabesMap() {
             {/* RENDER MODAL BARU */}
             {activeModal === 'guard' && <GuardModal showToast={showToast} onClose={() => setActiveModal(null)} />}
             {activeModal === 'quests' && <QuestModal gameState={gameState} onClose={() => setActiveModal(null)} />}
+                <MusicHUD />
         </>
     );
 }
