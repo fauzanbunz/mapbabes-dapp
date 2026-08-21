@@ -299,6 +299,51 @@ body {
     .building-label:active { box-shadow: 0px 0px 0px var(--lake-blue); margin-top: 3px !important; }
 
    /* --- AUTO ROTATE (FORCE LANDSCAPE UNTUK MOBILE) --- */
+/* --- ATURAN KHUSUS LAYAR MOBILE (HP) --- */
+@media (max-width: 768px) {
+    /* Penyesuaian Modal/Popup */
+    .babes-modal { width: 95vw; height: 90vh; padding: 15px; border-width: 4px; border-radius: 24px; }
+    .modal-body { flex-direction: column; overflow-y: auto; gap: 15px; }
+    .col-left, .col-right { overflow-y: visible; padding-right: 0; }
+    .item-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    
+    /* Penyesuaian Logo */
+    #map-logo { top: 40px; left: 10px; width: 25%; min-width: 70px; }
+    
+    /* Penyesuaian Marquee Atas */
+    .marquee-content { font-size: 10px; padding: 6px 0; }
+
+    /* HUD Profile Diperkecil Drastis */
+    .hud-profile { 
+        top: 35px; right: 10px; 
+        padding: 6px 10px; border-width: 2px; border-radius: 12px;
+        gap: 8px; box-shadow: 0px 4px 0px var(--lake-blue);
+    }
+    .hud-avatar { width: 35px; height: 35px; border-width: 2px; border-radius: 8px; font-size: 10px; }
+    .hud-name { font-size: 12px; }
+    .hud-xp-container { font-size: 9px; }
+    .hud-xp-bar-bg { height: 6px; border-width: 1px; }
+    .hud-balance { font-size: 11px; }
+    
+    /* Tombol Quests Diperkecil */
+    .hud-quests { 
+        top: 105px; right: 10px; 
+        padding: 8px 12px; font-size: 10px; border-width: 2px; border-radius: 10px;
+        box-shadow: 0px 4px 0px #A06B00;
+    }
+
+    /* LABEL BANGUNAN */
+    .building-label {
+        padding: 4px 8px; 
+        font-size: 8px; 
+        border-width: 2px; 
+        border-radius: 8px;
+        box-shadow: 0px 3px 0px var(--lake-blue);
+    }
+    .building-label:active { box-shadow: 0px 0px 0px var(--lake-blue); margin-top: 3px !important; }
+} /* <--- INI KURUNG TUTUP YANG SEBELUMNYA HILANG */
+
+/* --- AUTO ROTATE (FORCE LANDSCAPE UNTUK MOBILE) --- */
 @media screen and (orientation: portrait) {
     body {
         /* Memanipulasi orientasi body */
