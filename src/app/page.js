@@ -73,6 +73,8 @@ export default function BabesMap() {
 
             <div id="map-container">
                 <img id="map-frame" src="/frame2.webp" alt="Map Frame" />
+                {/* ---> PASANG MUSIC HUD DI SINI (Di dalam peta) <--- */}
+                <MusicHUD />
                 <div className="marquee-wrapper">
                     <div className="marquee-content"><span>BABES IN THE HOOD</span><span>BABES IN THE HOOD</span><span>BABES IN THE HOOD</span></div>
                     <div className="marquee-content"><span>BABES IN THE HOOD</span><span>BABES IN THE HOOD</span><span>BABES IN THE HOOD</span></div>
