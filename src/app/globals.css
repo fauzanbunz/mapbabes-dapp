@@ -343,31 +343,67 @@ body {
     .building-label:active { box-shadow: 0px 0px 0px var(--lake-blue); margin-top: 3px !important; }
 } /* <--- INI KURUNG TUTUP YANG SEBELUMNYA HILANG */
 
-/* --- AUTO ROTATE (FORCE LANDSCAPE UNTUK MOBILE) --- */
-@media screen and (orientation: portrait) {
+/* --- ATURAN KHUSUS LAYAR MOBILE (SISTEM GESER/PANNING) --- */
+@media (max-width: 768px) {
+    /* 1. Aktifkan fitur geser (scroll) horizontal pada HP */
     body {
-        /* Memanipulasi orientasi body */
-        width: 100vh;
-        height: 100vw;
-        transform: rotate(90deg);
-        transform-origin: center center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -50vw;
-        margin-left: -50vh;
-        overflow: hidden;
-    }
-    
-    #map-container {
-        /* Saat layar HP diputar, 'tinggi' layar menjadi 'vw' */
-        height: 90vw; 
-        max-width: 95vh; 
-        aspect-ratio: 16 / 9;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        align-items: flex-start;
+        -webkit-overflow-scrolling: touch; /* Membuat geseran jari terasa sangat mulus */
     }
 
-    .building-label {
-        font-size: 10px;
-        padding: 6px 12px;
+    /* 2. Kunci Peta: Tinggi full layar, Lebar memanjang ke samping (Zoom Mode) */
+    #map-container {
+        height: 100vh;
+        width: 177.77vh; /* Trik matematika: Memaksa rasio 16:9 yang akurat! */
+        max-width: none;
+        max-height: none;
+        border-radius: 0; /* Hapus bingkai agar peta menyatu dengan ujung HP */
+        border: none;
+        margin: 0;
+        aspect-ratio: auto; /* Matikan rasio bawaan */
     }
+
+    /* 3. Kunci HUD/UI agar melayang di kaca HP (Tidak ikut tergeser) */
+    .marquee-wrapper { position: fixed; width: 100vw; }
+    #map-logo { position: fixed; top: 40px; left: 10px; width: 100px; }
+    
+    .hud-profile { 
+        position: fixed; /* Rahasianya ada di fixed! */
+        top: 35px; right: 10px; 
+        padding: 6px 10px; border-width: 2px; border-radius: 12px;
+        gap: 8px; box-shadow: 0px 4px 0px var(--lake-blue);
+    }
+    
+    .hud-quests { 
+        position: fixed; 
+        top: 105px; right: 10px; 
+        padding: 8px 12px; font-size: 10px; border-width: 2px; border-radius: 10px;
+        box-shadow: 0px 4px 0px #A06B00;
+    }
+
+    /* 4. Kecilkan ukuran Profil agar rapi di layar sempit */
+    .hud-avatar { width: 35px; height: 35px; border-width: 2px; border-radius: 8px; font-size: 10px; }
+    .hud-name { font-size: 12px; }
+    .hud-xp-container { font-size: 9px; }
+    .hud-xp-bar-bg { height: 6px; border-width: 1px; }
+    .hud-balance { font-size: 11px; }
+    
+    /* 5. Sesuaikan Label Bangunan (Ikut bergeser bersama peta) */
+    .building-label {
+        padding: 5px 10px; 
+        font-size: 9px; 
+        border-width: 2px; 
+        border-radius: 8px;
+        box-shadow: 0px 3px 0px var(--lake-blue);
+    }
+    .building-label:active { box-shadow: 0px 0px 0px var(--lake-blue); margin-top: 3px !important; }
+
+    /* Penyesuaian Modal/Popup saat diklik */
+    .babes-modal { width: 95vw; height: 90vh; padding: 15px; border-width: 4px; border-radius: 24px; }
+    .modal-body { flex-direction: column; overflow-y: auto; gap: 15px; }
+    .col-left, .col-right { overflow-y: visible; padding-right: 0; }
+    .item-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
